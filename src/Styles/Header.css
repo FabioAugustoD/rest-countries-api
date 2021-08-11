@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.container[attr=dark] {
+  background-color: #202c37;
+}
+
+.container[attr=light] {
+  background-color: #fafafa;
+}
+
+body[attr=dark] {
+  background-color: #202c37;
+}
+
+body[attr=light] {
+  background-color: #fafafa;
+}
+
+[attr=light] {
+  background-color: white;
+  color: #111517;
+  transition: linear 1s;
+}
+
+[attr=dark] {
+  background-color: #2b3945;
+  color: white;
+  transition: linear 1s;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  align-items: center;
+  padding: 20px 20px;
+  font-size: 14px;
+}
+.header h1 {
+  padding-left: 1rem;
+}
+.header .fa-moon {
+  -moz-transition: all 1s;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+.header .fa-sun {
+  -moz-transition: all 1s;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+.header .theme {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  justify-content: center;
+}
+.header .theme span {
+  padding-left: 10px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 50px 50px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.container select {
+  padding-left: 40px;
+  width: 30rem;
+  max-width: 30rem;
+  min-width: 15rem;
+  width: 15rem;
+}
+.container input,
+.container select {
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+}
+.container .container-search {
+  display: flex;
+  align-items: center;
+}
+.container .container-search .placeholder {
+  padding-left: 40px;
+  width: 30rem;
+  max-width: 30rem;
+  min-width: 15rem;
+}
+.container .container-search svg {
+  width: 20px;
+  position: absolute;
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=Header.css.map */
