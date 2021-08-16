@@ -1,20 +1,5 @@
 @import "./Contents/Variables"
-
-@mixin inputSearch
-    padding-left: 40px
-    width: 30rem
-    max-width: 30rem
-    min-width: 15rem
-
-@mixin dark-theme
-    background-color: $dark-elements
-    color: $dark-text
-    transition: linear 1s
-
-@mixin light-theme
-    background-color: $light-elements
-    color: $light-text
-    transition: linear 1s
+@import "./Contents/Mixins"
 
 *
     margin: 0
@@ -40,6 +25,11 @@ body[attr=light]
 [attr=dark]
     @include dark-theme
 
+.header-bg
+    width: 100%
+    height: 30px
+    background-color: red
+
 .header
     display: grid
     grid-template-columns: 4fr 1fr
@@ -47,7 +37,10 @@ body[attr=light]
     padding: 20px 20px
     font-size: $font-title
 
-    h1
+    @media screen and (max-width: 520px)
+        width: 520px
+
+    .header-title
         padding-left: 1rem
 
     .fa-moon
@@ -63,7 +56,7 @@ body[attr=light]
         -webkit-transform: rotate(360deg)
         transform: rotate(360deg)
 
-    .theme
+    .header-theme
         cursor: pointer
         display: flex
         align-items: center
@@ -80,9 +73,16 @@ body[attr=light]
     flex-wrap: wrap
     justify-content: space-between
 
+    .container-filter
+        min-width: 25rem
+
     select
         @include inputSearch
-        width: 15rem
+        min-width: 15rem
+        float: right
+
+        @media screen and (max-width: 899px)
+            float: left
 
     input,
     select
@@ -101,3 +101,30 @@ body[attr=light]
             width: 20px
             position: absolute
             margin-left: 10px
+            margin-top: 15px
+
+.card-container
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
+    grid-gap: 4rem
+    padding: 50px 50px
+
+    div
+
+        .img-container
+            width: 400px
+            height: 200px
+            min-width: 200px
+
+            img
+                float: left
+                width: 400px
+                height: 200px
+                object-fit: cover
+
+        .info-container
+            max-width: 400px
+
+            ul
+                padding: 20px
+                list-style: none
