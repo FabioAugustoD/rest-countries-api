@@ -1,10 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 
-const ContentData = ({data}) => {   
+const ContentData = ({data, detail}) => {   
     
     function formatNumber(value) {
         return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    const history = useHistory()
+
+    const handleTaskDetailsClick = () => {
+        history.push(`/${detail}`)
     }
 
     return (       
@@ -14,12 +21,12 @@ const ContentData = ({data}) => {
                 data.map((el, idx) => (                   
                     <div className="card-container" key={idx}>
                         <div className="card-container-img" >
-                            <img src={el.flag} alt=""/>    
+                            <a href={el.name} onClick={e => handleTaskDetailsClick(e.target.alt)}><img src={el.flag} alt={el.name}/></a>  
                         </div>    
                                                                     
                         <div className="card-container-info" attr="dark">
                             <ul>                            
-                                <a href="#" attr="dark"><li><h2>{el.name}</h2></li></a>
+                                <li><h2>{el.name}</h2></li>
                                 <li><strong>Population:</strong> {formatNumber(el.population)} </li>
                                 <li><strong>Region:</strong> {el.region} </li>
                                 <li><strong>Capital:</strong> {el.capital} </li>

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Header from './Components/Header'
 import Search from './Components/Search';
 import ContentData from './Components/ContentData'
+import ContentDetail from './Components/ContentDetail'
 
 const Main = () => { 
   
+  const [detail , setDetail] = useState([])
   const [country , setCountry] = useState([])
+
   const [search , setFilter] = useState({
     input:  '',
     region: ''
@@ -44,6 +48,12 @@ const Main = () => {
     console.log(search.region)
   } 
 
+
+  const HandleImgClick = (name) => {
+    console.log(name)
+        setDetail(name)
+  }
+
   // Faz uma varredura no html e substitui os valores dos atributos conforme o tema
   const handleAttributeTheme = (el) => {
     
@@ -56,7 +66,7 @@ const Main = () => {
           try {                    
             document.getElementsByTagName(elements)[j].attributes.attr.nodeValue = theme? 'light' : 'dark'                    
           } catch (error) {
-            console.log('Element without attributes!')           
+                      
           }              
         }        
       }   
@@ -65,11 +75,25 @@ const Main = () => {
     }  
 
     return (
-        <>
-        <Header changeTheme={handleAttributeTheme}/>
-        <Search HandleInputChange={HandleInputChange} HandleRegionChange={HandleRegionChange} />        
-        <ContentData data={country}/>
-        </>        
+      <Router>
+        <div>
+          <Header changeTheme={handleAttributeTheme}/>
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <>
+                <Search 
+                  HandleInputChange={HandleInputChange}
+                  HandleRegionChange={HandleRegionChange}
+                />        
+                <ContentData data={country} detail={detail}/>
+              </>
+            )}
+          />
+          <Route path="/:detail" exact component={ContentDetail}/>
+        </div>
+      </Router>              
     )
 }
 
