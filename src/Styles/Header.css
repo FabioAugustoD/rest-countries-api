@@ -125,29 +125,53 @@ body[attr=light] {
   margin-top: 15px;
 }
 
-.card-container {
+.card {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  grid-gap: 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 5rem;
   padding: 50px 50px;
+  place-items: center;
 }
-.card-container div .img-container {
-  width: 400px;
+@media screen and (max-width: 520px) {
+  .card {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
+.card .card-container {
+  width: 300px;
+}
+.card .card-container .card-container-img {
+  width: 300px;
   height: 200px;
   min-width: 200px;
 }
-.card-container div .img-container img {
+.card .card-container .card-container-img img {
   float: left;
-  width: 400px;
+  width: 300px;
   height: 200px;
   object-fit: cover;
+  border-radius: 5px 5px 0px 0px;
 }
-.card-container div .info-container {
-  max-width: 400px;
+.card .card-container .card-container-info {
+  max-width: 300px;
+  border-radius: 0px 0px 5px 5px;
 }
-.card-container div .info-container ul {
-  padding: 20px;
+.card .card-container .card-container-info h2 {
+  padding: 0px 0px 10px 0px;
+}
+.card .card-container .card-container-info ul {
+  padding: 20px 0px 40px 25px;
   list-style: none;
+}
+.card .card-container .card-container-info ul li {
+  padding: 5px 0px 0px 0px;
+  font-size: 14px;
+}
+.card .card-container .card-container-info ul li strong {
+  padding-right: 1px;
+}
+.card .card-container .card-container-info ul a {
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=Header.css.map */

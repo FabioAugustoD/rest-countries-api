@@ -1,31 +1,35 @@
 import React from 'react';
 
 
-const ContentData = ({data}) => {     
+const ContentData = ({data}) => {   
+    
+    function formatNumber(value) {
+        return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+    }
 
-    return (
-       
-        <div className="card-container">       
-           {
+    return (       
+        <div className="card">
+            
+            {
                 data.map((el, idx) => (                   
-                    <div>
-                        <div className="img-container">
-                            <img src={el.flag} alt=""  />     
+                    <div className="card-container" key={idx}>
+                        <div className="card-container-img" >
+                            <img src={el.flag} alt=""/>    
                         </div>    
                                                                     
-                        <div className="info-container" attr="dark">
+                        <div className="card-container-info" attr="dark">
                             <ul>                            
-                                <li><h2>{el.name}</h2></li>
-                                <li>Population: {el.population} </li>
-                                <li>Region: {el.region} </li>
-                                <li>Capital: {el.capital} </li>
+                                <a href="#" attr="dark"><li><h2>{el.name}</h2></li></a>
+                                <li><strong>Population:</strong> {formatNumber(el.population)} </li>
+                                <li><strong>Region:</strong> {el.region} </li>
+                                <li><strong>Capital:</strong> {el.capital} </li>
                             </ul>
                         </div>
                     </div>                    
                 ))
             }
-        </div>         
-        
+            
+        </div>          
     )
 }
 

@@ -4,42 +4,45 @@ import Header from './Components/Header'
 import Search from './Components/Search';
 import ContentData from './Components/ContentData'
 
-require("es6-promise").polyfill()
-require("isomorphic-fetch")
-
 const Main = () => { 
   
   const [country , setCountry] = useState([])
   const [search , setFilter] = useState({
-    input: "",
-    region: ""
-  })
+    input:  '',
+    region: ''
+  })  
 
-  function filterByID(obj) {
-    if ("region" in obj === "Asia" ) {
-      return true
-    } else {      
-      return false
+  function FilterData(json, input) {
+    return json.filter(j => 
+      j.name.toLowerCase().includes(input.toLowerCase())
+    )
+  }
+  
+  useEffect(() => { 
+    const fetchCountries = q => {
+      const filter = q.region !== ''      
+      fetch(`https://restcountries.eu/rest/v2/${filter? 'region/' + q.region : 'all'} `)
+        .then((resp) => resp.json())                   
+        .then((json) => FilterData(json, q.input))          
+        .then((json) => setCountry(json))
+        .catch(err => {
+          console.log("Error:", err)
+        })
     }
+    fetchCountries(search)
+    }, [search]
+  )  
+
+  const HandleInputChange = (e) => {
+    const input = e
+    setFilter({...search, input})
   }
 
-  
-  useEffect(() => {      
-    fetch("https://restcountries.eu/rest/v2/region/europe")
-      .then((resp) => resp.json())             
-      // .then((resp) => resp.filter(filterByID))             
-      .then((json) => setCountry(json))      
-  }, [])
-
-  console.log(country)
-
-  // const getValue = (e) => {
-  //   setFilter(e)
-  // }
-
-  // https://restcountries.eu/rest/v2/name/canada?fields=name;population;region;capital;
-  // https://restcountries.eu/rest/v2/region/europe
-
+  const HandleRegionChange = (e) => {
+    const region = e
+    setFilter({...search, region})
+    console.log(search.region)
+  } 
 
   // Faz uma varredura no html e substitui os valores dos atributos conforme o tema
   const handleAttributeTheme = (el) => {
@@ -59,17 +62,12 @@ const Main = () => {
       }   
       document.getElementsByClassName(el)[0].className = theme? 'fas fa-sun' : 'fas fa-moon'            
       document.getElementById('mode').innerHTML = theme? 'Light Mode' : 'Dark Mode'    
-    }
-
-    // window.onload = function() {      
-    //   HandleApiData();       
-    // };    
-    //
+    }  
 
     return (
         <>
         <Header changeTheme={handleAttributeTheme}/>
-        <Search/>        
+        <Search HandleInputChange={HandleInputChange} HandleRegionChange={HandleRegionChange} />        
         <ContentData data={country}/>
         </>        
     )

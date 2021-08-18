@@ -103,28 +103,48 @@ body[attr=light]
             margin-left: 10px
             margin-top: 15px
 
-.card-container
+.card
     display: grid
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
-    grid-gap: 4rem
+    grid-template-columns: repeat(auto-fill, minmax($card-width, 1fr))
+    grid-gap: 5rem
     padding: 50px 50px
+    place-items: center
 
-    div
+    @media screen and (max-width: 520px)
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
 
-        .img-container
-            width: 400px
+    .card-container
+        width: $card-width
+
+        .card-container-img
+            width: $card-width
             height: 200px
             min-width: 200px
 
             img
                 float: left
-                width: 400px
+                width: $card-width
                 height: 200px
                 object-fit: cover
+                border-radius: 5px 5px 0px 0px
 
-        .info-container
-            max-width: 400px
+        .card-container-info
+            max-width: $card-width
+            border-radius: 0px 0px 5px 5px
+
+            h2
+                padding: 0px 0px 10px 0px
 
             ul
-                padding: 20px
+                padding: 20px 0px 40px 25px
                 list-style: none
+
+                li
+                    padding: 5px 0px 0px 0px
+                    font-size: 14px
+
+                    strong
+                        padding-right: 1px
+
+                a
+                    text-decoration: none
