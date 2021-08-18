@@ -1,19 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import Header from './Components/Header'
 import Search from './Components/Search';
 import ContentData from './Components/ContentData'
 
-const Main = () => { 
+require("es6-promise").polyfill()
+require("isomorphic-fetch")
 
-  // const [country , setCountry] = useState({
-  //   url: "https://restcountries.eu/rest/v2/all",
-  //   name: []
-        
-  // })
+const Main = () => { 
+  
+  const [country , setCountry] = useState([])
+  const [search , setFilter] = useState({
+    input: "",
+    region: ""
+  })
+
+  function filterByID(obj) {
+    if ("region" in obj === "Asia" ) {
+      return true
+    } else {      
+      return false
+    }
+  }
+
+  
+  useEffect(() => {      
+    fetch("https://restcountries.eu/rest/v2/region/europe")
+      .then((resp) => resp.json())             
+      // .then((resp) => resp.filter(filterByID))             
+      .then((json) => setCountry(json))      
+  }, [])
+
+  console.log(country)
+
+  // const getValue = (e) => {
+  //   setFilter(e)
+  // }
+
+  // https://restcountries.eu/rest/v2/name/canada?fields=name;population;region;capital;
+  // https://restcountries.eu/rest/v2/region/europe
+
 
   // Faz uma varredura no html e substitui os valores dos atributos conforme o tema
-    const handleAttributeTheme = (el) => {
-      
+  const handleAttributeTheme = (el) => {
+    
       let theme = el === "fas fa-moon"  
       const elements = '*'
       for (let i = 0; i < elements.length; i++) {
@@ -32,31 +62,15 @@ const Main = () => {
     }
 
     // window.onload = function() {      
-    //     handleApiData();         
-      
-    // };
-    
-    
+    //   HandleApiData();       
+    // };    
     //
-    // const handleApiData = () => {
-    //   let url = country.url
-    //   let name = country.name       
-    //   fetch(url)
-    //     .then(resp => resp.json())             
-    //     .then(resp => name.push(resp))
-
-
-    //     .then(setCountry({...country, name}))        
-    //     .then(resp => console.log(resp))
-    //     .then(resp => list.push(resp))
-    // }
-
 
     return (
         <>
         <Header changeTheme={handleAttributeTheme}/>
         <Search/>        
-        <ContentData/>
+        <ContentData data={country}/>
         </>        
     )
 }
