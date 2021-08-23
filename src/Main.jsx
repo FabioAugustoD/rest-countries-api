@@ -1,100 +1,108 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Header from './Components/Header'
-import Search from './Components/Search';
-import ContentData from './Components/ContentData'
-import ContentDetail from './Components/ContentDetail'
+import Header from "./Components/Header";
+import Search from "./Components/Search";
+import ContentData from "./Components/ContentData";
+import ContentDetail from "./Components/ContentDetail";
 
-const Main = () => { 
-  
-  const [detail , setDetail] = useState([])
-  const [country , setCountry] = useState([])
+const Main = () => {
+  const [detail, setDetail] = useState([]);
 
-  const [search , setFilter] = useState({
-    input:  '',
-    region: ''
-  })  
+  const [country, setCountry] = useState([]);
+
+  const [search, setFilter] = useState({
+    input: "",
+    region: "",
+  });
 
   function FilterData(json, input) {
-    return json.filter(j => 
+    return json.filter((j) =>
       j.name.toLowerCase().includes(input.toLowerCase())
-    )
+    );
   }
-  
-  useEffect(() => { 
-    const fetchCountries = q => {
-      const filter = q.region !== ''      
-      fetch(`https://restcountries.eu/rest/v2/${filter? 'region/' + q.region : 'all'} `)
-        .then((resp) => resp.json())                   
-        .then((json) => FilterData(json, q.input))          
+
+  useEffect(() => {
+    const fetchCountries = async (q) => {
+      const filter = q.region !== "";
+      await fetch(
+        `https://restcountries.eu/rest/v2/${
+          filter ? "region/" + q.region : "all"
+        } `
+      )
+        .then((resp) => resp.json())
+        .then((json) => FilterData(json, q.input))
         .then((json) => setCountry(json))
-        .catch(err => {
-          console.log("Error:", err)
-        })
-    }
-    fetchCountries(search)
-    }, [search]
-  )  
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    };
+    fetchCountries(search);
+  }, [search]);
 
   const HandleInputChange = (e) => {
-    const input = e
-    setFilter({...search, input})
-  }
+    const input = e;
+    setFilter({ ...search, input });
+  };
 
   const HandleRegionChange = (e) => {
-    const region = e
-    setFilter({...search, region})
-    console.log(search.region)
-  } 
+    const region = e;
+    setFilter({ ...search, region });
+  };
 
+  const HandleDetails = (value) => {
+    country.map((e) => {
+      if (e.name === value) {
+        // console.log(e)
+      }
+    });
+  };
 
-  const HandleImgClick = (name) => {
-    console.log(name)
-        setDetail(name)
-  }
+  console.log(detail);
 
   // Faz uma varredura no html e substitui os valores dos atributos conforme o tema
   const handleAttributeTheme = (el) => {
-    
-      let theme = el === "fas fa-moon"  
-      const elements = '*'
-      for (let i = 0; i < elements.length; i++) {
-        let size = document.getElementsByTagName(elements).length
+    let theme = el === "fas fa-moon";
+    const elements = "*";
+    for (let i = 0; i < elements.length; i++) {
+      let size = document.getElementsByTagName(elements).length;
 
-        for (let j = 0; j < size; j++) {          
-          try {                    
-            document.getElementsByTagName(elements)[j].attributes.attr.nodeValue = theme? 'light' : 'dark'                    
-          } catch (error) {
-                      
-          }              
-        }        
-      }   
-      document.getElementsByClassName(el)[0].className = theme? 'fas fa-sun' : 'fas fa-moon'            
-      document.getElementById('mode').innerHTML = theme? 'Light Mode' : 'Dark Mode'    
-    }  
+      for (let j = 0; j < size; j++) {
+        try {
+          document.getElementsByTagName(elements)[j].attributes.attr.nodeValue =
+            theme ? "light" : "dark";
+        } catch (error) {}
+      }
+    }
+    document.getElementsByClassName(el)[0].className = theme
+      ? "fas fa-sun"
+      : "fas fa-moon";
+    document.getElementById("mode").innerHTML = theme
+      ? "Light Mode"
+      : "Dark Mode";
+  };
 
-    return (
-      <Router>
-        <div>
-          <Header changeTheme={handleAttributeTheme}/>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <>
-                <Search 
-                  HandleInputChange={HandleInputChange}
-                  HandleRegionChange={HandleRegionChange}
-                />        
-                <ContentData data={country} detail={detail}/>
-              </>
-            )}
-          />
-          <Route path="/:detail" exact component={ContentDetail}/>
-        </div>
-      </Router>              
-    )
-}
+  return (
+    <Router>
+      <div>
+        <Header changeTheme={handleAttributeTheme} />
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <>
+              <Search
+                HandleInputChange={HandleInputChange}
+                HandleRegionChange={HandleRegionChange}
+              />
+              <ContentData data={country} HandleDetails={HandleDetails} />
+            </>
+          )}
+        />
+        <Route path="/:name" exact component={ContentDetail} />
+      </div>
+    </Router>
+  );
+};
 
-export default Main        
+export default Main;

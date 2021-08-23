@@ -176,4 +176,27 @@ body[attr=light] {
   padding-right: 1px;
 }
 
+.detail {
+  display: flex;
+  flex-wrap: wrap;
+}
+.detail .detail-flag {
+  padding: 50px;
+}
+.detail .detail-info {
+  padding: 50px;
+}
+.detail .detail-info .detail-info-desc {
+  display: flex;
+}
+.detail .detail-info .detail-info-desc ul {
+  list-style: none;
+}
+.detail .detail-info .detail-info-border {
+  display: flex;
+}
+.detail .detail-info .detail-info-border ul {
+  list-style: none;
+}
+
 /*# sourceMappingURL=Header.css.map */
