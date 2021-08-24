@@ -21,9 +21,11 @@ const ContentDetail = () => {
   return (
     <>
       <section className="country">
-        <Link to="/" className="btn btn-light">
-          <i className="fas fa-arrow-left"></i> Back Home
-        </Link>
+        <div className="btn-back">
+          <Link to="/" className="btn btn-light">
+            <i className="fas fa-arrow-left"></i> Back Home
+          </Link>
+        </div>
         {country.map((c) => {
           const {
             numericCode,
@@ -52,27 +54,54 @@ const ContentDetail = () => {
                 </div>
 
                 <div className="detail-info-desc">
-                  <ul>
-                    <li>Native Name: {nativeName}</li>
-                    <li>Population: {population}</li>
-                    <li>Region: {region}</li>
-                    <li>Sub Region: {subregion}</li>
-                    <li>Capital: {capital}</li>
-                  </ul>
+                  <div>
+                    <ul>
+                      <li>
+                        <span> Native Name:</span> {nativeName}
+                      </li>
+                      <li>
+                        <span> Population:</span> {population}
+                      </li>
+                      <li>
+                        <span> Region:</span> {region}
+                      </li>
+                      <li>
+                        <span> Sub Region:</span> {subregion}
+                      </li>
+                      <li>
+                        <span> Capital:</span> {capital}
+                      </li>
+                    </ul>
+                  </div>
 
-                  <ul>
-                    <li>Top Level Domain: {topLevelDomain}</li>
-                    <li>Currencies: {currencies[0].name}</li>
-                    <li>Languages: {languages[0].name}</li>
-                  </ul>
+                  <div>
+                    <ul>
+                      <li>
+                        <span> Top Level Domain:</span> {topLevelDomain}
+                      </li>
+                      <li>
+                        <span> Currencies:</span> {currencies[0].name}
+                      </li>
+                      <li>
+                        <span> Languages:</span> {languages[0].name}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
                 <div className="detail-info-border">
+                  <div>
+                    <h5>Border Countries:</h5>
+                  </div>
                   {borders.map((border) => {
                     return (
-                      <ul key={border}>
-                        <li>{border}</li>
-                      </ul>
+                      <div>
+                        <ul key={border}>
+                          <li>
+                            <span>{border}</span>
+                          </li>
+                        </ul>
+                      </div>
                     );
                   })}
                 </div>
