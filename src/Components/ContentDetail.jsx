@@ -7,6 +7,7 @@ const ContentDetail = () => {
   const { name } = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchCountries = async () => {
       await fetch(`https://restcountries.eu/rest/v2/name/${name}`)
         .then((resp) => resp.json())
@@ -18,14 +19,21 @@ const ContentDetail = () => {
     fetchCountries();
   }, [name]);
 
+  function formatNumber(value) {
+    return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+  }
+
   return (
     <>
-      <section className="country">
+      <div className="btn-container">
         <div className="btn-back">
-          <Link to="/" className="btn btn-light">
-            <i className="fas fa-arrow-left"></i> Back Home
+          <Link to="/" className="btn btn-light" attr="dark">
+            <i className="fas fa-arrow-left"></i> Back
           </Link>
         </div>
+      </div>
+
+      <section className="country">
         {country.map((c) => {
           const {
             numericCode,
@@ -47,7 +55,6 @@ const ContentDetail = () => {
               <div className="detail-flag">
                 <img src={flag} alt="" />
               </div>
-
               <div className="detail-info">
                 <div className="detail-info-title">
                   <h2>{name}</h2>
@@ -60,7 +67,7 @@ const ContentDetail = () => {
                         <span> Native Name:</span> {nativeName}
                       </li>
                       <li>
-                        <span> Population:</span> {population}
+                        <span> Population:</span> {formatNumber(population)}
                       </li>
                       <li>
                         <span> Region:</span> {region}
@@ -98,7 +105,7 @@ const ContentDetail = () => {
                       <div>
                         <ul key={border}>
                           <li>
-                            <span>{border}</span>
+                            <span attr="dark">{border}</span>
                           </li>
                         </ul>
                       </div>

@@ -1,7 +1,7 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const ContentData = ({ data, HandleDetails }) => {
+const ContentData = ({ data }) => {
   function formatNumber(value) {
     return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
   }

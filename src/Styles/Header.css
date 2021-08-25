@@ -145,13 +145,14 @@ body[attr=light] {
   width: 300px;
   transition: linear 1s;
 }
+.card .card-container a {
+  cursor: pointer;
+  text-decoration: none;
+}
 .card .card-container .card-container-img {
   width: 300px;
   height: 200px;
   min-width: 200px;
-}
-.card .card-container .card-container-img a {
-  cursor: pointer;
 }
 .card .card-container .card-container-img img {
   float: left;
@@ -159,7 +160,6 @@ body[attr=light] {
   height: 200px;
   object-fit: cover;
   border-radius: 5px 5px 0px 0px;
-  cursor: pointer;
 }
 .card .card-container .card-container-info {
   max-width: 300px;
@@ -180,65 +180,119 @@ body[attr=light] {
   padding-right: 1px;
 }
 
-.detail {
-  display: flex;
-  place-items: center;
-  flex-wrap: wrap;
+.btn-container {
+  height: 20vh;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   align-content: center;
-  justify-content: space-evenly;
-  align-items: center;
+  place-items: center;
 }
-.detail .detail-flag {
+@media screen and (max-width: 520px) {
+  .btn-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.btn-container .btn-back {
+  padding: 50px 10px;
+}
+.btn-container .btn-back .btn-light {
+  border-radius: 9px;
+  padding: 5px 30px;
+  box-shadow: 0px 0px 3px 1px #2b3945;
+}
+.btn-container .btn-back .btn-light i {
+  width: 20px;
+}
+
+.country {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  padding: 10px;
+}
+.country .detail {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(auto-fill, 600px);
+  width: 100%;
+  justify-content: center;
+  gap: 5rem;
+}
+@media screen and (max-width: 520px) {
+  .country .detail {
+    display: grid;
+    font-size: 20px;
+    grid-template-columns: repeat(auto-fill, 500px);
+    width: 100%;
+    justify-content: normal;
+    gap: 5rem;
+  }
+}
+.country .detail .detail-flag {
   width: 500px;
   height: 400px;
   min-width: 200px;
 }
-.detail .detail-flag img {
+.country .detail .detail-flag img {
   float: left;
   width: 500px;
   height: 400px;
   object-fit: cover;
 }
-.detail .detail-info {
+.country .detail .detail-info {
   width: 500px;
   height: 400px;
   min-width: 200px;
 }
-.detail .detail-info .detail-info-title {
+.country .detail .detail-info .detail-info-title {
   padding: 20px 0px 20px 0px;
 }
-.detail .detail-info .detail-info-desc {
+.country .detail .detail-info .detail-info-desc {
   display: flex;
 }
-.detail .detail-info .detail-info-desc div {
+@media screen and (max-width: 1299px) {
+  .country .detail .detail-info .detail-info-desc {
+    display: block;
+  }
+}
+.country .detail .detail-info .detail-info-desc div {
   padding: 0px 0px 40px;
 }
-.detail .detail-info .detail-info-desc div:nth-child(2) {
-  padding: 0px 100px 0px;
+.country .detail .detail-info .detail-info-desc div:nth-child(2) {
+  padding: 0px 50px 0px;
 }
-.detail .detail-info .detail-info-desc ul {
+@media screen and (max-width: 1299px) {
+  .country .detail .detail-info .detail-info-desc div:nth-child(2) {
+    padding: 0;
+  }
+}
+.country .detail .detail-info .detail-info-desc ul {
   list-style: none;
 }
-.detail .detail-info .detail-info-desc ul li {
-  padding: 4px 0px;
+.country .detail .detail-info .detail-info-desc ul li {
+  padding: 5px 0px;
 }
-.detail .detail-info .detail-info-desc ul li span {
+@media screen and (max-width: 520px) {
+  .country .detail .detail-info .detail-info-desc ul li {
+    padding: 10px 0px;
+  }
+}
+.country .detail .detail-info .detail-info-desc ul li span {
   font-weight: bold;
 }
-.detail .detail-info .detail-info-border {
+.country .detail .detail-info .detail-info-border {
   display: flex;
   padding: 20px 0px 20px 0px;
   flex-wrap: wrap;
 }
-.detail .detail-info .detail-info-border ul {
+.country .detail .detail-info .detail-info-border ul {
   list-style: none;
 }
-.detail .detail-info .detail-info-border ul li {
+.country .detail .detail-info .detail-info-border ul li {
   padding-bottom: 15px;
 }
-.detail .detail-info .detail-info-border ul li span {
+.country .detail .detail-info .detail-info-border ul li span {
   padding: 2px 15px;
-  background-color: black;
   align-content: center;
   margin-left: 20px;
   border-radius: 3px;
