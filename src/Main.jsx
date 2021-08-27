@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, HashRouter } from "react-router-dom";
 
 import Header from "./Components/Header";
 import Search from "./Components/Search";
@@ -83,11 +83,11 @@ const Main = () => {
   };
 
   return (
-    <Router>
+    <HashRouter basename="/">
       <div>
         <Header changeTheme={handleAttributeTheme} />
         <Route
-          path="/"
+          path=""
           exact
           render={() => (
             <>
@@ -101,7 +101,7 @@ const Main = () => {
         />
         <Route path="/:name" exact component={ContentDetail} />
       </div>
-    </Router>
+    </HashRouter>
   );
 };
 
