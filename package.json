@@ -1,5 +1,5 @@
 {
-  "homepage": "http://FabioAugustoD.github.io/rest-countries-api",
+  "homepage": "https://FabioAugustoD.github.io/rest-countries-api",
   "name": "my-api",
   "version": "0.1.0",
   "private": true,
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -b main -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
