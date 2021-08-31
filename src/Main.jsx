@@ -7,10 +7,7 @@ import ContentData from "./Components/ContentData";
 import ContentDetail from "./Components/ContentDetail";
 
 const Main = () => {
-  const [detail, setDetail] = useState([]);
-
   const [country, setCountry] = useState([]);
-
   const [search, setFilter] = useState({
     input: "",
     region: "",
@@ -50,16 +47,6 @@ const Main = () => {
     setFilter({ ...search, region });
   };
 
-  const HandleDetails = (value) => {
-    country.map((e) => {
-      if (e.name === value) {
-        // console.log(e)
-      }
-    });
-  };
-
-  console.log(detail);
-
   // Faz uma varredura no html e substitui os valores dos atributos conforme o tema
   const handleAttributeTheme = (el) => {
     let theme = el === "fas fa-moon";
@@ -95,7 +82,7 @@ const Main = () => {
                 HandleInputChange={HandleInputChange}
                 HandleRegionChange={HandleRegionChange}
               />
-              <ContentData data={country} HandleDetails={HandleDetails} />
+              <ContentData data={country} />
             </>
           )}
         />
